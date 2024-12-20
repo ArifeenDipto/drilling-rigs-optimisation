@@ -1,0 +1,20 @@
+paths:
+ raw_data: 'D:/ML/Drilling_project/src/drilling_mad94/data/raw/formation_data.csv'
+ proc_data: 'D:/ML/Drilling_project/src/drilling_mad94/data/processed'
+ save_path: 'D:/ML/Drilling_project/src/drilling_mad94/saved_models'
+ figure: 'D:/ML/Drilling_project/src/drilling_mad94/figures/'
+ 
+parameters:
+ correlation_type: 'pearson'
+ correlation_threshold: 0.4
+ target_feature: 'FPress'
+ data_type: 'processed'
+
+train_pars:
+ target_variable: 'FPress'
+ test_size: 0.3
+ 
+model_pars:
+ svr_kernels: ['linear', 'poly', 'rbf', 'sigmoid']
+ C_reg: 1.0
+ epsilon: 0.1
