@@ -73,7 +73,14 @@ class RegressionModels:
         self.models['SVR_{}'.format(kernel_type)] = svr
         print("SVR model trained successfully.")
         self.save_models()
-
+        
+    def svr_properties(self, model_name, X_tr, y_tr):
+        model = self.load_models(model_name)
+        support_vectors = model.support_
+        X_support = X_tr[support_vectors]
+        y_support = y_tr[support_vectors]
+        return X_support, y_support
+        
     def train_pls(self, X, y, n_components):
         """
         Train a PLS Regression model.

@@ -19,6 +19,9 @@ class ModelEvaluator:
         self.data = None
         self.features =None
         self.target =None
+        self.target_vars = None
+        self.prediction = None
+        
     def create_data(self):
         self.processor.data_read(self.config_local['parameters']['data_type'])
         data = self.processor.data
@@ -33,12 +36,30 @@ class ModelEvaluator:
         self.create_data()
         self.reg_model.evaluate_model(model_type, self.data[1], self.data[3])
         
+    def model_prediction(self, model_type):
+        self.create_data()
+        predictors = self.processor.scale_whole_data(self.features)
+        self.target_vars = self.processor.scale_whole_data(self.target.values.reshape(-1,1))
+        self.prediction = self.reg_model.predict(model_type, predictors)
+    
+        
     def plot_prediction(self, model_name):
+        self.model_prediction(model_name)     
+        self.plot.plot_predictions(self.target_vars, self.prediction)
+        
+    def model_analysis(self, model_name):
+        self.create_data()
+        #pred = self.reg_model.predict(model_name, self.data[1])
+        if model_name == 'SVR_linear' or 'SVR_rbf' or 'SVR_poly' or 'SVR_sigmoid':
+            support_vectors = self.reg_model.svr_properties(model_name, self.data[0], self.data[2])
+            self.plot.plot_support_vector(self.data[0], self.config_local['parameters']['feature_1'], self.config_local['parameters']['feature_2'], support_vectors[0])
+            
+        
+    def plot_residual(self, model_name):
         self.create_data()
         predictors = self.processor.scale_whole_data(self.features)
         target_vars = self.processor.scale_whole_data(self.target.values.reshape(-1,1))
         prediction = self.reg_model.predict(model_name, predictors)
-        self.plot.plot_predictions(target_vars, prediction)
-        
-        
+        residuals = target_vars - prediction
+        self.plot.plot_residuals(target_vars, prediction)       
         

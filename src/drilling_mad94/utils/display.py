@@ -117,3 +117,29 @@ class Plotter:
             plt.show()
         else:
             plt.close()
+            
+    def plot_support_vector(self, X_train, feature_1, feature_2, X_support, show = True):
+        plt.figure(figsize=(10, 6))
+        plt.scatter(X_train[:, feature_1], X_train[:, feature_2], color="blue", label="Training Data")
+        plt.scatter(X_support[:, feature_1], X_support[:, feature_2], color="green", edgecolor="black", s=100, label="Support Vectors", marker="o")
+        plt.xlabel(f"Feature {feature_1}")
+        plt.ylabel(f"Feature {feature_2}")
+        plt.title("Support Vectors in Feature Space")
+        plt.legend()
+        if show:
+            plt.show()
+        else:
+            plt.close()
+            
+            
+    def plot_residuals(self, target, residuals, show = True):
+        plt.figure(figsize=(8, 6))
+        plt.scatter(target, residuals)
+        plt.axhline(0, color='red', linestyle='--')
+        plt.xlabel('True Values')
+        plt.ylabel('Residuals')
+        plt.title('Residual Analysis')
+        if show:
+            plt.show()
+        else:
+            plt.close()

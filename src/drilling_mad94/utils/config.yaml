@@ -9,6 +9,8 @@ parameters:
  correlation_threshold: 0.4
  target_feature: 'FPress'
  data_type: 'processed'
+ feature_1: 1
+ feature_2: 2
 
 train_pars:
  target_variable: 'FPress'
@@ -18,3 +20,4 @@ model_pars:
  svr_kernels: ['linear', 'poly', 'rbf', 'sigmoid']
  C_reg: 1.0
  epsilon: 0.1
+ 

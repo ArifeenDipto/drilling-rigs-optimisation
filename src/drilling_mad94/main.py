@@ -37,7 +37,7 @@ def parse_args(config):
                         help='Type of Kernel for SVR model.')
     parser.add_argument('--n_comp', type=int,
                         help='Number of components for PLS and PCR model')
-    parser.add_argument('--plot_type', type=str, choices=['correlation', 'predictions', 'residuals'],
+    parser.add_argument('--plot_type', type=str, choices=['correlation', 'predictions', 'residuals', 's_vectors'],
                         help="Type of plot to generate: 'correlation', 'predictions', 'residuals'.")
     
     
@@ -90,6 +90,10 @@ def main():
             processor.show_correlation(args.data_type)
         elif args.plot_type == 'predictions':
             evaluator.plot_prediction(args.model)
+        elif args.plot_type == 'residuals':
+            evaluator.plot_residual(args.model)
+        elif args.plot_type == 's_vectors':
+            evaluator.model_analysis(args.model)
                    
     elif args.task == 'select_features':
         processor.select_features(args.data_type)
