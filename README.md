@@ -1,5 +1,5 @@
 
-# Machine Learning Pipeline CLI Tool
+# Machine Learning Pipeline CLI Tool for predicting formation pressure
 
 This project provides a **Command-Line Interface (CLI)** tool for performing data processing, visualization, feature selection, model training, and evaluation. It supports a flexible YAML configuration system to streamline workflows for various machine learning models.
 
